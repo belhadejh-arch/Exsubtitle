@@ -1,0 +1,50 @@
+2026-06-26T17:04:13.524038699Z #9 0.257 Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [5412 B]
+2026-06-26T17:04:13.674772005Z #9 0.257 Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [223 kB]
+2026-06-26T17:04:14.133880831Z #9 0.867 Fetched 9990 kB in 1s (12.8 MB/s)
+2026-06-26T17:04:14.644874971Z #9 0.867 Reading package lists...
+2026-06-26T17:04:15.15230714Z #9 1.404 Reading package lists...
+2026-06-26T17:04:15.326129539Z #9 1.897 Building dependency tree...
+2026-06-26T17:04:15.3261556Z #9 2.059 Reading state information...
+2026-06-26T17:04:15.458191148Z #9 2.071 Package libgl1-mesa-glx is not available, but is referred to by another package.
+2026-06-26T17:04:15.458207478Z #9 2.071 This may mean that the package is missing, has been obsoleted, or
+2026-06-26T17:04:15.458212638Z #9 2.071 is only available from another source
+2026-06-26T17:04:15.458216648Z #9 2.071 
+2026-06-26T17:04:15.458220738Z #9 2.075 E: Package 'libgl1-mesa-glx' has no installation candidate
+2026-06-26T17:04:15.458226688Z #9 ERROR: process "/bin/sh -c apt-get update && apt-get install -y --no-install-recommends     tesseract-ocr     tesseract-ocr-ara     tesseract-ocr-eng     tesseract-ocr-rus     tesseract-ocr-tur     tesseract-ocr-hin     tesseract-ocr-urd     libgl1-mesa-glx     libglib2.0-0     libsm6     libxext6     libxrender-dev     && apt-get clean     && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
+2026-06-26T17:04:15.458230678Z ------
+2026-06-26T17:04:15.458235348Z  > importing cache manifest
+2026-06-26T17:04:15.458239228Z ------
+2026-06-26T17:04:15.458243118Z ------
+2026-06-26T17:04:15.458252158Z  > [3/6] RUN apt-get update && apt-get install -y --no-install-recommends     tesseract-ocr     tesseract-ocr-ara     tesseract-ocr-eng     tesseract-ocr-rus     tesseract-ocr-tur     tesseract-ocr-hin     tesseract-ocr-urd     libgl1-mesa-glx     libglib2.0-0     libsm6     libxext6     libxrender-dev     && apt-get clean     && rm -rf /var/lib/apt/lists/*:
+2026-06-26T17:04:15.458258819Z 0.257 Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [223 kB]
+2026-06-26T17:04:15.458264939Z 
+2026-06-26T17:04:15.458291579Z 
+2026-06-26T17:04:15.458299169Z 
+2026-06-26T17:04:15.45831751Z 2.059 Reading state information...
+2026-06-26T17:04:15.45832254Z 2.071 Package libgl1-mesa-glx is not available, but is referred to by another package.
+2026-06-26T17:04:15.45832646Z 2.071 This may mean that the package is missing, has been obsoleted, or
+2026-06-26T17:04:15.45833057Z 2.071 is only available from another source
+2026-06-26T17:04:15.45833469Z 2.071 
+2026-06-26T17:04:15.45833902Z 2.075 E: Package 'libgl1-mesa-glx' has no installation candidate
+2026-06-26T17:04:15.45834286Z ------
+2026-06-26T17:04:15.4595155Z Dockerfile:5
+2026-06-26T17:04:15.459545691Z --------------------
+2026-06-26T17:04:15.459550951Z    4 |     
+2026-06-26T17:04:15.459554521Z    5 | >>> RUN apt-get update && apt-get install -y --no-install-recommends \
+2026-06-26T17:04:15.459557711Z    6 | >>>     tesseract-ocr \
+2026-06-26T17:04:15.459561241Z    7 | >>>     tesseract-ocr-ara \
+2026-06-26T17:04:15.459563671Z    8 | >>>     tesseract-ocr-eng \
+2026-06-26T17:04:15.459565661Z    9 | >>>     tesseract-ocr-rus \
+2026-06-26T17:04:15.459567631Z   10 | >>>     tesseract-ocr-tur \
+2026-06-26T17:04:15.459569511Z   11 | >>>     tesseract-ocr-hin \
+2026-06-26T17:04:15.459571501Z   12 | >>>     tesseract-ocr-urd \
+2026-06-26T17:04:15.459573421Z   13 | >>>     libgl1-mesa-glx \
+2026-06-26T17:04:15.459575391Z   14 | >>>     libglib2.0-0 \
+2026-06-26T17:04:15.459577351Z   15 | >>>     libsm6 \
+2026-06-26T17:04:15.459579261Z   16 | >>>     libxext6 \
+2026-06-26T17:04:15.459581191Z   17 | >>>     libxrender-dev \
+2026-06-26T17:04:15.459583091Z   18 | >>>     && apt-get clean \
+2026-06-26T17:04:15.459585011Z   19 | >>>     && rm -rf /var/lib/apt/lists/*
+2026-06-26T17:04:15.459586951Z   20 |     
+2026-06-26T17:04:15.459588891Z --------------------
+2026-06-26T17:04:15.459595761Z error: failed to solve: process "/bin/sh -c apt-get update && apt-get install -y --no-install-recommends     tesseract-ocr     tesseract-ocr-ara     tesseract-ocr-eng     tesseract-ocr-rus     tesseract-ocr-tur     tesseract-ocr-hin     tesseract-ocr-urd     libgl1-mesa-glx     libglib2.0-0     libsm6     libxext6     libxrender-dev     && apt-get clean     && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100

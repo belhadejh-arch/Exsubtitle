@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.11-slim-bookworm
 
 WORKDIR /app
 
@@ -10,11 +10,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     tesseract-ocr-tur \
     tesseract-ocr-hin \
     tesseract-ocr-urd \
-    libgl1-mesa-glx \
+    libgl1 \
     libglib2.0-0 \
     libsm6 \
     libxext6 \
-    libxrender-dev \
+    libxrender1 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
