@@ -14,155 +14,283 @@ st.set_page_config(
     page_title="مستخرج الترجمة المدمجة",
     page_icon="🎬",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="auto",
 )
 
-# ─── Custom CSS (Changa font + brand colors) ─────────────────────────────────
+# ─── Custom CSS (Changa font + brand colors + responsive) ────────────────────
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Changa:wght@300;400;500;600;700&display=swap');
 
+/* ── Base ──────────────────────────────────────────────────────────────────── */
 html, body, [class*="css"] {
     font-family: 'Changa', sans-serif !important;
     direction: rtl;
 }
 
-/* Main background */
 .stApp {
     background-color: #0f2532;
 }
 
-/* Sidebar */
+/* ── Sidebar ───────────────────────────────────────────────────────────────── */
 [data-testid="stSidebar"] {
     background-color: #1A3A4A !important;
     border-right: 2px solid #2C6B7F;
+    min-width: 260px !important;
 }
 [data-testid="stSidebar"] * {
     color: #e8f4f8 !important;
     font-family: 'Changa', sans-serif !important;
 }
 
-/* Headers */
+/* ── Typography ────────────────────────────────────────────────────────────── */
 h1, h2, h3, h4 {
     font-family: 'Changa', sans-serif !important;
     color: #D4A24E !important;
     font-weight: 700;
+    line-height: 1.3;
+}
+h1 { font-size: clamp(1.4rem, 4vw, 2.2rem) !important; }
+h2 { font-size: clamp(1.1rem, 3vw, 1.6rem) !important; }
+h3 { font-size: clamp(1rem, 2.5vw, 1.3rem) !important; }
+
+p, span, label, div { color: #e8f4f8; }
+
+/* ── Main content padding – tighter on small screens ───────────────────────── */
+.block-container {
+    padding-top: 1.5rem !important;
+    padding-bottom: 2rem !important;
+    padding-left: clamp(0.75rem, 3vw, 3rem) !important;
+    padding-right: clamp(0.75rem, 3vw, 3rem) !important;
+    max-width: 100% !important;
 }
 
-/* Buttons */
+/* ── Buttons ───────────────────────────────────────────────────────────────── */
 .stButton > button {
     background-color: #2C6B7F !important;
     color: #ffffff !important;
     font-family: 'Changa', sans-serif !important;
     font-weight: 600;
     border: none;
-    border-radius: 8px;
-    padding: 0.6rem 1.5rem;
+    border-radius: 10px;
+    padding: 0.7rem 1.5rem;
+    font-size: clamp(0.9rem, 2.5vw, 1.05rem);
     transition: all 0.2s ease;
     width: 100%;
+    min-height: 48px;        /* touch-friendly */
 }
 .stButton > button:hover {
     background-color: #1A3A4A !important;
     border: 1px solid #D4A24E !important;
     color: #D4A24E !important;
-    transform: translateY(-1px);
+}
+.stButton > button:active {
+    transform: scale(0.97);
 }
 
-/* Download button */
+/* ── Download button ───────────────────────────────────────────────────────── */
 [data-testid="stDownloadButton"] > button {
     background-color: #D4A24E !important;
     color: #1A3A4A !important;
     font-family: 'Changa', sans-serif !important;
     font-weight: 700;
     border: none;
-    border-radius: 8px;
-    padding: 0.6rem 1.5rem;
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
     width: 100%;
-    font-size: 1.1rem;
+    min-height: 52px;
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
 }
 [data-testid="stDownloadButton"] > button:hover {
     background-color: #c49040 !important;
-    transform: translateY(-1px);
 }
 
-/* Progress bar */
+/* ── Progress bar ──────────────────────────────────────────────────────────── */
 .stProgress > div > div > div {
     background-color: #D4A24E !important;
 }
 
-/* Success / info messages */
+/* ── Alerts / info boxes ───────────────────────────────────────────────────── */
 .stAlert {
     border-radius: 10px;
     font-family: 'Changa', sans-serif !important;
+    font-size: clamp(0.85rem, 2vw, 1rem);
 }
 
-/* Select box */
+/* ── Select / Slider labels ────────────────────────────────────────────────── */
 .stSelectbox label, .stFileUploader label, .stSlider label {
     color: #D4A24E !important;
     font-family: 'Changa', sans-serif !important;
     font-weight: 600;
+    font-size: clamp(0.85rem, 2vw, 1rem);
 }
 
-/* Text area */
+/* ── File uploader ─────────────────────────────────────────────────────────── */
+[data-testid="stFileUploader"] {
+    border-radius: 12px;
+    background-color: #1A3A4A;
+    border: 2px dashed #2C6B7F;
+    padding: 0.5rem;
+}
+
+/* ── Text area ─────────────────────────────────────────────────────────────── */
 .stTextArea textarea {
     background-color: #1A3A4A !important;
     color: #e8f4f8 !important;
     font-family: 'Courier New', monospace !important;
     border: 1px solid #2C6B7F;
     border-radius: 8px;
+    font-size: clamp(0.75rem, 1.8vw, 0.9rem);
 }
 
-/* General text */
-p, span, label, div {
-    color: #e8f4f8;
-}
-
-/* Card-like containers */
+/* ── Metric cards ──────────────────────────────────────────────────────────── */
 .metric-card {
     background-color: #1A3A4A;
     border: 1px solid #2C6B7F;
     border-radius: 12px;
-    padding: 1rem;
+    padding: clamp(0.6rem, 2vw, 1rem);
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 .metric-card .value {
-    font-size: 2rem;
+    font-size: clamp(1.2rem, 4vw, 2rem);
     font-weight: 700;
     color: #D4A24E;
+    word-break: break-word;
 }
 .metric-card .label {
-    font-size: 0.9rem;
+    font-size: clamp(0.75rem, 2vw, 0.9rem);
     color: #a0c4d4;
+    margin-top: 4px;
 }
 
-/* Section divider */
+/* ── Section divider ───────────────────────────────────────────────────────── */
 .section-divider {
     border-top: 1px solid #2C6B7F;
-    margin: 1.5rem 0;
+    margin: 1rem 0;
 }
 
-/* Live preview box */
+/* ── Live text box ─────────────────────────────────────────────────────────── */
 .live-text-box {
     background-color: #1A3A4A;
     border: 1px solid #D4A24E;
     border-radius: 10px;
-    padding: 1rem;
-    min-height: 80px;
-    font-size: 1.1rem;
+    padding: clamp(0.6rem, 2vw, 1rem);
+    min-height: 70px;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
     color: #ffffff;
     direction: rtl;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-break: break-word;
 }
 
-/* Frame caption */
-.frame-caption {
-    background-color: #2C6B7F;
-    color: #fff;
+/* ── Landing hero ──────────────────────────────────────────────────────────── */
+.landing-hero {
     text-align: center;
-    padding: 4px 10px;
-    border-radius: 0 0 8px 8px;
-    font-size: 0.85rem;
+    padding: clamp(1.5rem, 5vw, 3rem) 0;
+}
+.landing-hero .hero-icon {
+    font-size: clamp(3rem, 10vw, 5rem);
+}
+.landing-hero h3 {
+    font-size: clamp(1.1rem, 3.5vw, 1.6rem) !important;
+    margin-top: 0.5rem;
+}
+.landing-hero p {
+    font-size: clamp(0.85rem, 2.2vw, 1rem);
+    color: #a0c4d4;
+    max-width: 520px;
+    margin: 0.75rem auto 0;
+    line-height: 1.6;
+}
+
+/* ── Steps list ────────────────────────────────────────────────────────────── */
+.steps-list {
+    font-size: clamp(0.82rem, 2vw, 0.95rem);
+    line-height: 1.9;
+}
+
+/* ── RESPONSIVE BREAKPOINTS ────────────────────────────────────────────────── */
+
+/* Tablet  (≤ 1024 px) */
+@media (max-width: 1024px) {
+    [data-testid="stSidebar"] {
+        min-width: 230px !important;
+    }
+    .block-container {
+        padding-left: clamp(0.5rem, 2vw, 1.5rem) !important;
+        padding-right: clamp(0.5rem, 2vw, 1.5rem) !important;
+    }
+}
+
+/* Mobile (≤ 768 px) */
+@media (max-width: 768px) {
+    /* Stack columns vertically */
+    [data-testid="stHorizontalBlock"] {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+    [data-testid="stHorizontalBlock"] > div {
+        width: 100% !important;
+        flex: 1 1 100% !important;
+        min-width: 100% !important;
+    }
+
+    /* Compact padding */
+    .block-container {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+        padding-top: 1rem !important;
+    }
+
+    /* Smaller metric cards */
+    .metric-card {
+        padding: 0.5rem;
+        border-radius: 10px;
+    }
+
+    /* Sidebar full-width when expanded on mobile */
+    [data-testid="stSidebar"] {
+        min-width: 100vw !important;
+        max-width: 100vw !important;
+    }
+
+    /* Bigger touch areas for sliders */
+    [data-testid="stSlider"] input[type="range"] {
+        height: 28px;
+    }
+
+    /* Buttons fill the screen */
+    .stButton > button,
+    [data-testid="stDownloadButton"] > button {
+        min-height: 54px;
+        font-size: 1rem;
+        border-radius: 12px;
+    }
+
+    .live-text-box {
+        min-height: 60px;
+        font-size: 0.95rem;
+    }
+}
+
+/* Small mobile (≤ 480 px) */
+@media (max-width: 480px) {
+    h1 { font-size: 1.25rem !important; }
+    h3 { font-size: 0.95rem !important; }
+
+    .block-container {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+
+    .metric-card .value { font-size: 1.1rem; }
+    .metric-card .label { font-size: 0.72rem; }
+
+    .stAlert { font-size: 0.82rem; }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -268,13 +396,18 @@ with st.sidebar:
     )
     st.markdown(
         """
+        <div class="steps-list">
+
         **الخطوات:**
         1. ارفع ملف الفيديو
         2. اختر لغة الترجمة
         3. اضغط **ابدأ المعالجة**
         4. انتظر انتهاء التحليل
         5. حمّل ملف SRT
-        """
+
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
 
 # ─── Main area ───────────────────────────────────────────────────────────────
@@ -508,10 +641,10 @@ else:
     # Landing state
     st.markdown(
         """
-        <div style="text-align:center; padding: 3rem 0;">
-            <div style="font-size: 5rem;">🎬</div>
-            <h3 style="color:#D4A24E; font-family:'Changa',sans-serif;">ارفع ملف فيديو للبدء</h3>
-            <p style="color:#a0c4d4; max-width:500px; margin:auto;">
+        <div class="landing-hero">
+            <div class="hero-icon">🎬</div>
+            <h3>ارفع ملف فيديو للبدء</h3>
+            <p>
                 يدعم التطبيق الفيديوهات التي تحتوي على ترجمة مدمجة (Hardsubs)
                 بـ 6 لغات مختلفة. قم بتحديد إعدادات المعالجة من القائمة الجانبية
                 ثم ارفع الفيديو.
