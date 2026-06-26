@@ -1,0 +1,13 @@
+kind = "web"
+previewPath = "/"
+title = "مستخرج الترجمة المدمجة"
+version = "1.0.0"
+id = "8bacab73598e407a828d"
+
+[[services]]
+localPort = 5000
+name = "Streamlit App"
+paths = ["/"]
+
+[services.development]
+run = "cd streamlit-app && streamlit run main.py"

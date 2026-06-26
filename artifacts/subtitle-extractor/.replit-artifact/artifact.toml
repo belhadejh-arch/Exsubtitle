@@ -1,0 +1,22 @@
+kind = "web"
+previewPath = "/"
+title = "مستخرج الترجمة المدمجة"
+version = "1.0.0"
+id = "artifacts/subtitle-extractor"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 5000
+
+[services.development]
+run = "cd /home/runner/workspace/streamlit-app && streamlit run main.py"
+
+[services.env]
+PORT = "5000"
+BASE_PATH = "/"
