@@ -8,6 +8,21 @@ import tempfile
 import os
 import io
 import time
+import shutil
+
+# ─── Auto-detect Tesseract path ─────────────────────────────────────────────
+def _find_tesseract() -> str:
+    candidates = [
+        "/usr/bin/tesseract",
+        "/usr/local/bin/tesseract",
+        shutil.which("tesseract") or "",
+    ]
+    for p in candidates:
+        if p and os.path.isfile(p):
+            return p
+    return "tesseract"
+
+pytesseract.pytesseract.tesseract_cmd = _find_tesseract()
 
 # ─── Page config ────────────────────────────────────────────────────────────
 st.set_page_config(

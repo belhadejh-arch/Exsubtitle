@@ -23,11 +23,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY streamlit-app/ ./streamlit-app/
 
-EXPOSE 8501
+EXPOSE 10000
 
-CMD streamlit run streamlit-app/main.py \
-    --server.port=${PORT:-8501} \
-    --server.address=0.0.0.0 \
-    --server.headless=true \
-    --server.enableCORS=false \
-    --server.enableXsrfProtection=false
+ENTRYPOINT ["sh", "-c", "streamlit run streamlit-app/main.py --server.port=${PORT:-10000} --server.address=0.0.0.0 --server.headless=true --server.enableCORS=false --server.enableXsrfProtection=false --server.maxUploadSize=500 --server.maxMessageSize=500"]
